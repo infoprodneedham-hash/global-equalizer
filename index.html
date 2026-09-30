@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Global Equilibrium Gazette — Practical Systems Blueprint</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Editorial Serif & News Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,400&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            masthead: ['Cinzel', 'serif'],
+            headline: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Newsreader', 'Georgia', 'serif'],
+            mono: ['Space Mono', 'monospace'],
+          },
+          colors: {
+            news: {
+              paper: '#fcfbf7',
+              aged: '#f4f1ea',
+              ink: '#121212',
+              charcoal: '#222222',
+              rule: '#1a1a1a',
+              dim: '#666666',
+              lightborder: '#d6d3c9'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Halftone & Newsprint Texture Overlays */
+    body {
+      background-color: #f6f4ee;
+      color: #121212;
+      background-image: radial-gradient(rgba(0,0,0,0.06) 1px, transparent 0);
+      background-size: 24px 24px;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .border-double-bottom {
+      border-bottom: 3px double #121212;
+    }
+    .border-double-top {
+      border-top: 3px double #121212;
+    }
+    .border-thick {
+      border-color: #121212;
+      border-width: 2px;
+    }
+
+    /* Print Drop Cap */
+    .drop-cap::first-letter {
+      float: left;
+      font-size: 4rem;
+      line-height: 0.8;
+      padding-top: 4px;
+      padding-right: 8px;
+      padding-bottom: 2px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 900;
+      color: #000;
+    }
+
+    /* Subtle custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #eae7dd;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #555;
+    }
+
+    /* Tab active transitions */
+    .tab-btn.active {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    /* Schematic Box Styler */
+    .schematic-box {
+      border: 1px solid #121212;
+      position: relative;
+      background-color: #ffffff;
+    }
+    .schematic-box::before {
+      content: "";
+      position: absolute;
+      top: 2px; left: 2px; right: 2px; bottom: 2px;
+      border: 1px dashed #777;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="font-body selection:bg-black selection:text-white min-h-screen flex flex-col justify-between">
+
+  <header class="w-full max-w-7xl mx-auto px-4 pt-4 pb-2">
+    <!-- Top Bar: Edition Data & Dispatch Ticker -->
+    <div class="flex flex-col md:flex-row justify-between items-center text-xs font-mono tracking-wider border-b border-black pb-2 mb-2 gap-2">
+      <div class="flex items-center space-x-3">
+        <span class="font-bold bg-black text-white px-2 py-0.5 uppercase tracking-widest text-[11px]">Special Edition</span>
+        <span class="text-news-dim">VOL. CLXXIV — No. 42,910</span>
+        <span class="hidden sm:inline text-news-dim">|</span>
+        <span class="text-news-ink font-semibold">PLANETARY CIRCULATION</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span id="dateline-date" class="font-semibold uppercase tracking-wider">OCTOBER 1, 2026</span>
+        <span>•</span>
+        <span class="italic font-body text-sm font-semibold">"Engineering the Commons for Equilibrium"</span>
+        <span>•</span>
+        <span class="font-bold">PRICE: COMPLIMENTARY OPEN KNOWLEDGE</span>
+      </div>
+    </div>
+
+    <!-- Main Broadsheet Title Masthead -->
+    <div class="text-center py-4 md:py-6 border-b-2 border-black">
+      <p class="font-mono text-xs uppercase tracking-[0.3em] text-neutral-600 mb-1">A Comprehensive Systems Engineering Chronicle</p>
+      <h1 class="font-masthead text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter text-black uppercase font-black transform scale-y-95">
+        The Global Equilibrium
+      </h1>
+      <p class="font-masthead text-lg sm:text-2xl md:text-3xl tracking-widest text-neutral-800 uppercase mt-1">
+        — G A Z E T T E —
+      </p>
+      <p class="font-headline italic text-sm md:text-base text-neutral-700 mt-2 max-w-3xl mx-auto">
+        "Transitioning from Extractive Geopolitical Volatility to Closed-Loop Industrial & Ecological Autonomy"
+      </p>
+    </div>
+
+    <!-- Primary Newspaper Section Navigation Bar -->
+    <nav class="border-y-2 border-black py-2.5 my-2">
+      <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-6 text-sm font-mono tracking-widest uppercase">
+        <button onclick="navigateToPage('page-front')" id="nav-btn-front" class="tab-btn active px-4 py-1.5 transition-all font-bold hover:bg-black hover:text-white rounded-none">
+          Front Page
+        </button>
+        <span class="text-neutral-400">/</span>
+        <button onclick="navigateToPage('page-breakdown')" id="nav-btn-breakdown" class="tab-btn px-4 py-1.5 transition-all font-bold hover:bg-black hover:text-white rounded-none">
+          Blueprint Sections & Categories
+        </button>
+        <span class="text-neutral-400">/</span>
+        <button onclick="navigateToPage('page-dispatch')" id="nav-btn-dispatch" class="tab-btn px-4 py-1.5 transition-all font-bold hover:bg-black hover:text-white rounded-none">
+          Civic Forum & Dispatch MP
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="w-full max-w-7xl mx-auto px-4 py-4 flex-grow">
+
+    <!-- =============================================================== -->
+    <!-- PAGE 1: FRONT PAGE / HOMEPAGE                                    -->
+    <!-- =============================================================== -->
+    <section id="page-front" class="space-y-8 animate-fade">
+      
+      <!-- Top News Header Banner -->
+      <div class="border-b border-black pb-2 text-center">
+        <p class="font-mono text-xs uppercase tracking-widest font-bold">
+          [ SPECIAL REPORT FROM THE MULTILATERAL TECHNICAL TASKFORCE ]
+        </p>
+      </div>
+
+      <!-- HERO ARTICLE WITH BLACK AND WHITE CITY NIGHT SKY PHOTO CANVAS -->
+      <article class="grid grid-cols-1 lg:grid-cols-12 gap-6 pb-8 border-b-2 border-black">
+        <!-- Lead Headlines -->
+        <div class="lg:col-span-5 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-black pb-6 lg:pb-0 lg:pr-6">
+          <div>
+            <div class="inline-block bg-neutral-200 border border-black px-2 py-0.5 text-xs font-mono uppercase mb-3 font-semibold">
+              Global Synthesis • Lead Thesis
+            </div>
+            <h2 class="font-headline text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-black mb-4">
+              Architecture of Global Equilibrium: Practical Systems Engineering for Planetary Challenges
+            </h2>
+            <p class="font-body text-xl italic text-neutral-800 leading-snug mb-5 border-l-4 border-black pl-3 py-1">
+              "Planetary crises are not moral or political failings—they are interconnected architectural flaws within economic, industrial, and diplomatic infrastructure."
+            </p>
+            <div class="font-body text-neutral-900 text-base leading-relaxed text-justify space-y-4">
+              <p class="drop-cap">
+                Contemporary planetary dilemmas—from critical mineral bottlenecks and hydrological shocks to geopolitical resource friction—consistently suffer from centralized administrative paralysis. Addressing these challenges requires abandoning abstract diplomatic posturing in favor of decentralized engineering, closed-loop resource logistics, and market-aligned economic structures.
+              </p>
+              <p>
+                By linking high-tech research blocs directly with resource-sovereign emerging economies through multilateral public patent pools, containerized water autonomy, and strict cradle-to-cradle lifecycle mandates, this blueprint constructs a resilient foundation for long-term planetary stability.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-neutral-300">
+            <button onclick="navigateToBreakdownSection('exec-summary')" class="w-full text-center bg-black text-white hover:bg-neutral-800 py-3 font-mono text-xs uppercase tracking-widest transition-all">
+              Inspect Full Executive Blueprint &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero Canvas Graphic: Large metropolis under starry sky with moon -->
+        <div class="lg:col-span-7 flex flex-col">
+          <div class="relative w-full h-[380px] sm:h-[450px] bg-black border-2 border-black overflow-hidden shadow-sm group">
+            <!-- Dynamic Black & White Canvas: City Skyline with Moon and Stars -->
+            <canvas id="cityHeroCanvas" class="w-full h-full block filter contrast-125" title="Monochromatic City Skyline beneath Moonlight & Stars"></canvas>
+            
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4 sm:p-6 text-white">
+              <span class="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-neutral-300 bg-white/20 px-2 py-0.5 rounded-none inline-block mb-1">
+                Monochrome Photographic Plate No. 1
+              </span>
+              <p class="font-headline text-lg sm:text-2xl font-bold tracking-tight text-white drop-shadow">
+                The Dense Metropolis under Celestial Vigil
+              </p>
+              <p class="font-body italic text-xs sm:text-sm text-neutral-300 mt-1 max-w-xl">
+                A high-resolution black & white rendering of modern industrial density, framed by the celestial night sky—embodying the balance between technological civilization and planetary bounds.
+              </p>
+            </div>
+          </div>
+          
+          <div class="flex justify-between items-center text-[11px] font-mono text-neutral-600 mt-2 px-1">
+            <span>FIGURE 1.0: THE INTEGRATED GLOBAL METROPOLIS</span>
+            <span>SHADOW & LIGHT SENSOR DYNAMICS</span>
+          </div>
+
+          <!-- Micro Lead Articles / Sub-columns below Hero -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 pt-4 border-t border-black">
+            <div class="border-r-0 sm:border-r border-black pr-0 sm:pr-4">
+              <h3 class="font-headline font-bold text-lg text-black mb-1">Open-Ledger Resource Tracking</h3>
+              <p class="text-xs font-body text-neutral-700 leading-relaxed">
+                By making mining concessions and freshwater extraction transparent on cryptographic shared ledgers, transnational predatory extraction is curbed before armed escalation can begin.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-headline font-bold text-lg text-black mb-1">True-Cost Feebate Dynamics</h3>
+              <p class="text-xs font-body text-neutral-700 leading-relaxed">
+                Ending virgin polymer subsidies and funding 100% circular rebates guarantees clean choices undercut extraction in competitive consumer markets.
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <div class="text-center py-2 border-b border-black">
+        <h3 class="font-headline text-2xl md:text-3xl font-black uppercase tracking-tight text-black">
+          Index of Headings & Systemic Chapters
+        </h3>
+        <p class="font-mono text-xs uppercase tracking-widest text-neutral-600 mt-1">
+          Explore All Six Pillars of the Global Systems Architecture
+        </p>
+      </div>
+
+      <!-- PLACE CARDS GRID FOR ALL HEADINGS IN THE DOCUMENT -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
+        
+        <!-- CARD 1: CHAPTER 1 -->
+        <div class="schematic-box p-5 flex flex-col justify-between hover:shadow-lg transition-shadow">
+          <div>
+            <div class="flex justify-between items-center border-b border-black pb-2 mb-3">
+              <span class="font-mono text-xs font-bold text-black uppercase tracking-wider">Chapter 01</span>
+              <span class="font-mono text-[10px] text-neutral-500 uppercase">Geopolitics & IP</span>
+            </div>
+            <h4 class="font-headline text-xl font-bold text-black mb-2 leading-tight">
+              The Geopolitical Paradigm: Equity, IP Trusts, and Conflict Defusal
+            </h4>
+            <p class="text-xs font-body italic text-neutral-600 mb-4">
+              Transitioning international engagement into a rules-based network of shared mutual incentives.
+            </p>
+            <ul class="text-xs font-mono space-y-2 border-t border-neutral-200 pt-3 text-neutral-800">
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">1.1</span>
+                <span>The Hub-and-Spoke Technology Transfer Model & IP Trusts</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">1.2</span>
+                <span>Resource Sovereignty as Diplomatic Parity (Value-Add Refinement)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">1.3</span>
+                <span>Conflict De-escalation Through Shared Commons & Telemetry</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-3 border-t border-black flex justify-between items-center">
+            <span class="text-[10px] font-mono uppercase text-neutral-500">3 Sub-Sections</span>
+            <button onclick="navigateToBreakdownSection('chap-1')" class="font-mono text-xs font-bold underline hover:text-neutral-600 tracking-wider">
+              Read Breakdown &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 2: CHAPTER 2 -->
+        <div class="schematic-box p-5 flex flex-col justify-between hover:shadow-lg transition-shadow">
+          <div>
+            <div class="flex justify-between items-center border-b border-black pb-2 mb-3">
+              <span class="font-mono text-xs font-bold text-black uppercase tracking-wider">Chapter 02</span>
+              <span class="font-mono text-[10px] text-neutral-500 uppercase">Economics & Social</span>
+            </div>
+            <h4 class="font-headline text-xl font-bold text-black mb-2 leading-tight">
+              Grassroots Economics and Social Alignment
+            </h4>
+            <p class="text-xs font-body italic text-neutral-600 mb-4">
+              Aligning daily individual financial self-interest with planetary regenerative boundaries.
+            </p>
+            <ul class="text-xs font-mono space-y-2 border-t border-neutral-200 pt-3 text-neutral-800">
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">2.1</span>
+                <span>The "Feebate" Framework and True-Cost Pricing Penalties</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">2.2</span>
+                <span>Micro-Entrepreneurship and Community-Owned PAYG Utilities</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">Ex.</span>
+                <span>Extended Producer Responsibility (EPR) Full-Lifecycle Mandates</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-3 border-t border-black flex justify-between items-center">
+            <span class="text-[10px] font-mono uppercase text-neutral-500">2 Sub-Sections</span>
+            <button onclick="navigateToBreakdownSection('chap-2')" class="font-mono text-xs font-bold underline hover:text-neutral-600 tracking-wider">
+              Read Breakdown &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 3: CHAPTER 3 -->
+        <div class="schematic-box p-5 flex flex-col justify-between hover:shadow-lg transition-shadow">
+          <div>
+            <div class="flex justify-between items-center border-b border-black pb-2 mb-3">
+              <span class="font-mono text-xs font-bold text-black uppercase tracking-wider">Chapter 03</span>
+              <span class="font-mono text-[10px] text-neutral-500 uppercase">Hydrology & Water</span>
+            </div>
+            <h4 class="font-headline text-xl font-bold text-black mb-2 leading-tight">
+              Modular Water Security: Marine Innovation for Terrestrial Resilience
+            </h4>
+            <p class="text-xs font-body italic text-neutral-600 mb-4">
+              Bypassing mega-dam vulnerability with decentralized containerized desalination.
+            </p>
+            <ul class="text-xs font-mono space-y-2 border-t border-neutral-200 pt-3 text-neutral-800">
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">3.1</span>
+                <span>Scaling Down: Containerized Intermodal Reverse Osmosis (10k-50k L/day)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">3.2</span>
+                <span>Sustainable Brine Mitigation: Distributed Outfall & Mineral Pans</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">3.3</span>
+                <span>Isobaric Energy Recovery Devices (ERD 60-70% Power Slashes)</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-3 border-t border-black flex justify-between items-center">
+            <span class="text-[10px] font-mono uppercase text-neutral-500">2 Sub-Sections</span>
+            <button onclick="navigateToBreakdownSection('chap-3')" class="font-mono text-xs font-bold underline hover:text-neutral-600 tracking-wider">
+              Read Breakdown &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 4: CHAPTER 4 -->
+        <div class="schematic-box p-5 flex flex-col justify-between hover:shadow-lg transition-shadow">
+          <div>
+            <div class="flex justify-between items-center border-b border-black pb-2 mb-3">
+              <span class="font-mono text-xs font-bold text-black uppercase tracking-wider">Chapter 04</span>
+              <span class="font-mono text-[10px] text-neutral-500 uppercase">Batteries & Minerals</span>
+            </div>
+            <h4 class="font-headline text-xl font-bold text-black mb-2 leading-tight">
+              Industrial Circularity, Electrification, and Battery Life Cycles
+            </h4>
+            <p class="text-xs font-body italic text-neutral-600 mb-4">
+              Preventing an ecological metal extraction crisis through total material closing.
+            </p>
+            <ul class="text-xs font-mono space-y-2 border-t border-neutral-200 pt-3 text-neutral-800">
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">4.1</span>
+                <span>Chemical Stratification: Sodium-Ion / Iron-Air vs LFP vs NMC</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">4.2</span>
+                <span>Engineering for Rapid Disassembly (Mono-Material & Busbars)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">4.3</span>
+                <span>Digital Passports & Ambient Hydrometallurgical Urban Mining</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-3 border-t border-black flex justify-between items-center">
+            <span class="text-[10px] font-mono uppercase text-neutral-500">3 Sub-Sections</span>
+            <button onclick="navigateToBreakdownSection('chap-4')" class="font-mono text-xs font-bold underline hover:text-neutral-600 tracking-wider">
+              Read Breakdown &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 5: CHAPTER 5 -->
+        <div class="schematic-box p-5 flex flex-col justify-between hover:shadow-lg transition-shadow">
+          <div>
+            <div class="flex justify-between items-center border-b border-black pb-2 mb-3">
+              <span class="font-mono text-xs font-bold text-black uppercase tracking-wider">Chapter 05</span>
+              <span class="font-mono text-[10px] text-neutral-500 uppercase">Cross-Cutting Systems</span>
+            </div>
+            <h4 class="font-headline text-xl font-bold text-black mb-2 leading-tight">
+              Cross-Cutting Frontiers: Energy, Food, and Health
+            </h4>
+            <p class="text-xs font-body italic text-neutral-600 mb-4">
+              Resilient baseline pillars safeguarding nutrition, clean megawatts, and immunology.
+            </p>
+            <ul class="text-xs font-mono space-y-2 border-t border-neutral-200 pt-3 text-neutral-800">
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">5.1</span>
+                <span>Sustainable Baseload: Deep Geothermal (EGS) & SMR Microgrids</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">5.2</span>
+                <span>Decoupled Food: Precision Fermentation, Agritech & Insect Feeds</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">5.3</span>
+                <span>Decentralized Health: Paper Microfluidics & Pod mRNA Bio-vats</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-3 border-t border-black flex justify-between items-center">
+            <span class="text-[10px] font-mono uppercase text-neutral-500">3 Sub-Sections</span>
+            <button onclick="navigateToBreakdownSection('chap-5')" class="font-mono text-xs font-bold underline hover:text-neutral-600 tracking-wider">
+              Read Breakdown &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 6: CHAPTER 6 & CONCLUSION -->
+        <div class="schematic-box p-5 flex flex-col justify-between hover:shadow-lg transition-shadow">
+          <div>
+            <div class="flex justify-between items-center border-b border-black pb-2 mb-3">
+              <span class="font-mono text-xs font-bold text-black uppercase tracking-wider">Chapter 06 & Summary</span>
+              <span class="font-mono text-[10px] text-neutral-500 uppercase">20-Year Horizon</span>
+            </div>
+            <h4 class="font-headline text-xl font-bold text-black mb-2 leading-tight">
+              Implementation Roadmap & Systems Synthesis
+            </h4>
+            <p class="text-xs font-body italic text-neutral-600 mb-4">
+              A phased 20-year execution architecture from legal harmonization to closed loops.
+            </p>
+            <ul class="text-xs font-mono space-y-2 border-t border-neutral-200 pt-3 text-neutral-800">
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">6.1</span>
+                <span>Phase 1 (Y0–5): Standards, Passports & Multilateral Patent Trusts</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">6.2</span>
+                <span>Phase 2 (Y5–12): Containerized Desalination & Urban Black Mass</span>
+              </li>
+              <li class="flex items-start">
+                <span class="font-bold mr-1.5 text-black">6.3</span>
+                <span>Phase 3 (Y12–20): Mandatory DfD & 100% Extraction Parity</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-3 border-t border-black flex justify-between items-center">
+            <span class="text-[10px] font-mono uppercase text-neutral-500">Full Execution Map</span>
+            <button onclick="navigateToBreakdownSection('chap-6')" class="font-mono text-xs font-bold underline hover:text-neutral-600 tracking-wider">
+              Read Breakdown &rarr;
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Dispatch Call to Action Strip -->
+      <div class="border-2 border-black bg-white p-6 mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>
+          <h4 class="font-headline text-2xl font-bold">Have your voice recorded in the Planetary Archive</h4>
+          <p class="font-body text-sm text-neutral-700">Submit your feedback, select critical systems priorities, and draft an instant letter to your local legislative representative.</p>
+        </div>
+        <button onclick="navigateToPage('page-dispatch')" class="px-6 py-3 bg-black text-white font-mono text-xs uppercase tracking-widest hover:bg-neutral-800 shrink-0">
+          Open Civic Dispatch Form &rarr;
+        </button>
+      </div>
+
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- PAGE 2: CATEGORY BREAKDOWN & DEEP-DIVE SECTIONS                 -->
+    <!-- =============================================================== -->
+    <section id="page-breakdown" class="hidden space-y-10">
+
+      <!-- Breadcrumbs and Filter Navigation Bar -->
+      <div class="border-b-2 border-black pb-4">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div>
+            <h2 class="font-headline text-3xl md:text-4xl font-black text-black">The Technical Blueprint: Chapter Directory</h2>
+            <p class="font-mono text-xs text-neutral-600 uppercase tracking-widest mt-1">Full Systems Breakdown, Schematics & Empirical Proofs</p>
+          </div>
+          <div class="text-right">
+            <span class="font-mono text-xs font-bold border border-black px-3 py-1">6 CORE DISCIPLINES</span>
+          </div>
+        </div>
+
+        <!-- Section Filter Jump Buttons -->
+        <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs uppercase">
+          <button onclick="jumpToSubSection('exec-summary')" class="border border-black px-3 py-1 bg-white hover:bg-black hover:text-white transition">Exec Summary</button>
+          <button onclick="jumpToSubSection('chap-1')" class="border border-black px-3 py-1 bg-white hover:bg-black hover:text-white transition">Ch 1: Geopolitics & IP</button>
+          <button onclick="jumpToSubSection('chap-2')" class="border border-black px-3 py-1 bg-white hover:bg-black hover:text-white transition">Ch 2: Grassroots Economics</button>
+          <button onclick="jumpToSubSection('chap-3')" class="border border-black px-3 py-1 bg-white hover:bg-black hover:text-white transition">Ch 3: Modular Water</button>
+          <button onclick="jumpToSubSection('chap-4')" class="border border-black px-3 py-1 bg-white hover:bg-black hover:text-white transition">Ch 4: Battery & Mineral</button>
+          <button onclick="jumpToSubSection('chap-5')" class="border border-black px-3 py-1 bg-white hover:bg-black hover:text-white transition">Ch 5: Energy, Food & Health</button>
+          <button onclick="jumpToSubSection('chap-6')" class="border border-black px-3 py-1 bg-white hover:bg-black hover:text-white transition">Ch 6: 20-Yr Roadmap</button>
+        </div>
+      </div>
+
+      <article id="exec-summary" class="border border-black p-6 bg-white space-y-4">
+        <div class="border-b border-black pb-2 flex justify-between items-center">
+          <span class="font-mono text-xs font-bold uppercase tracking-widest">Document Inception</span>
+          <span class="font-mono text-xs text-neutral-500">PAGES 1–2 OF COMPENDIUM</span>
+        </div>
+        <h3 class="font-headline text-3xl font-bold text-black">Executive Summary: Shifting from Blame to Structural Redesign</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-body text-neutral-800 leading-relaxed text-justify">
+          <p>
+            Contemporary planetary crises—resource depletion, climate volatility, and socioeconomic polarization—are treated repeatedly by legacy institutions as moral failings or political intransigence. In reality, they are mechanical consequences of legacy architectural designs created during periods of perceived infinite resources and zero-cost externalities.
+          </p>
+          <p>
+            The blueprint bypasses the requirement for centralized global hegemony. By engineering decentralized physical hardware (intermodal RO, microgrids, low-temp hydrometallurgical processing) and locking economic self-interest to circular throughput (feebates, battery passports), regenerative practices naturally outcompete extractive alternatives on unit economics.
+          </p>
+        </div>
+      </article>
+
+      <article id="chap-1" class="border border-black p-6 bg-white space-y-6">
+        <div class="border-b border-black pb-2 flex justify-between items-center">
+          <span class="font-mono text-xs font-bold uppercase bg-black text-white px-2 py-0.5">Chapter 1</span>
+          <span class="font-mono text-xs text-neutral-600 uppercase">Geopolitical Paradigm</span>
+        </div>
+        <h3 class="font-headline text-3xl font-black text-black">
+          The Geopolitical Paradigm: Equity, IP Trusts, and Conflict Defusal
+        </h3>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div class="lg:col-span-7 space-y-4 text-justify font-body text-base">
+            <h4 class="font-headline font-bold text-xl text-black">1.1 The Hub-and-Spoke Technology Transfer Model</h4>
+            <p>
+              Traditional foreign aid perpetuates dependency, while raw resource sales foster neocolonial extractivism. The blueprint resolves this imbalance through <strong>Public-Domain IP Patent Trusts</strong>. High-income nations channel capital and academic capacity into baseline physical inventions—such as solid-state membranes, low-energy metallurgical extraction, and open hardware micro-electronics. These patents reside within a shared multilateral trust, granting developing nations royalty-free licenses to build, repair, and iterate equipment natively.
+            </p>
+            <h4 class="font-headline font-bold text-xl text-black pt-2">1.2 Resource Sovereignty as Diplomatic Parity</h4>
+            <p>
+              True diplomatic parity cannot arise from moral charity; it requires domestic leverage. Developing nations containing key critical minerals (lithium, cobalt, nickel, rare earth elements) transition from unrefined raw exporters into processing sovereigns. Organised into value-add regional processing consortiums, they negotiate as vital manufacturing partners.
+            </p>
+            <h4 class="font-headline font-bold text-xl text-black pt-2">1.3 Conflict De-escalation Through Shared Commons</h4>
+            <p>
+              Most kinetic warfare originates in resource opacity and localized scarcity. By establishing open-ledger telemetry for shared cross-border aquifer levels, microgrid interchanges, and timber harvesting, belligerents face instant early warnings and massive mutual economic penalties should diplomacy break down.
+            </p>
+          </div>
+
+          <!-- Schematic Box: Geopolitical IP Model -->
+          <div class="lg:col-span-5 schematic-box p-4 flex flex-col justify-between">
+            <div>
+              <p class="font-mono text-xs font-bold text-center border-b border-black pb-1 mb-3 uppercase">
+                Schematic 1.0: Global Technology Treaty
+              </p>
+              <div class="space-y-3 font-mono text-xs">
+                <div class="border border-black p-2 bg-neutral-50">
+                  <span class="font-bold block text-black">WEALTHY HIGH-TECH BLOCS</span>
+                  <span class="text-neutral-700 text-[11px]">• Heavy R&D Baseline Funding<br>• Open IP Patent Pools in Trust</span>
+                </div>
+                <div class="text-center font-black text-sm">▼ [Royalty-Free Open Architecture] ▼</div>
+                <div class="border border-black p-2 bg-neutral-50">
+                  <span class="font-bold block text-black">RESOURCE-RICH / GLOBAL SOUTH</span>
+                  <span class="text-neutral-700 text-[11px]">• Critical Mineral Reserves Domestic Refining<br>• Modular Tech Regional Fabrication<br>• Equal Multilateral Governance Seats</span>
+                </div>
+                <div class="text-center font-black text-sm">▲ [Shared Stability & Supply Chains] ▲</div>
+              </div>
+            </div>
+            <p class="font-mono text-[10px] text-neutral-500 italic mt-3 pt-2 border-t border-neutral-300">
+              Reconstructed from Chapter 1 architectural diagram: "Equity, IP Trusts, and Conflict Defusal".
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <article id="chap-2" class="border border-black p-6 bg-white space-y-6">
+        <div class="border-b border-black pb-2 flex justify-between items-center">
+          <span class="font-mono text-xs font-bold uppercase bg-black text-white px-2 py-0.5">Chapter 2</span>
+          <span class="font-mono text-xs text-neutral-600 uppercase">Grassroots Alignment</span>
+        </div>
+        <h3 class="font-headline text-3xl font-black text-black">
+          Grassroots Economics and Social Alignment
+        </h3>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div class="lg:col-span-6 space-y-4 font-body text-base text-justify">
+            <h4 class="font-headline font-bold text-xl text-black">2.1 The "Feebate" Framework and True-Cost Pricing</h4>
+            <p>
+              Whenever virgin extraction is artificially subsidized, circular solutions cannot gain traction without ongoing philanthropy. Under the <strong>Revenue-Neutral Feebate Framework</strong>, governments levy explicit levies on virgin petrochemicals, unrecycled laminates, and planned obsolescence. Every penny gathered is immediately rebated to producers and buyers of verified mono-material, modular, and circular alternatives.
+            </p>
+            <h4 class="font-headline font-bold text-xl text-black pt-2">2.2 Micro-Utilities and Extended Producer Responsibility</h4>
+            <p>
+              In rural and developing markets, high capital hurdles prevent modernization. Deploying <strong>Pay-As-You-Go (PAYG)</strong> off-grid solar systems, cold storage locks, and standardized water kiosks removes the debt trap. Manufacturers retain full end-of-life disposal liability (EPR), driving products designed for rapid wrench disassembly.
+            </p>
+          </div>
+
+          <!-- Visualizing the Linear vs Circular Economic Model ASCII/SVG -->
+          <div class="lg:col-span-6 schematic-box p-4">
+            <p class="font-mono text-xs font-bold text-center border-b border-black pb-1 mb-3 uppercase">
+              Schematic 2.0: Linear Extraction vs. True-Cost Feebate Circularity
+            </p>
+            <div class="grid grid-cols-2 gap-3 font-mono text-[11px]">
+              <!-- Linear Column -->
+              <div class="border border-black p-3 bg-neutral-100 flex flex-col justify-between">
+                <div>
+                  <div class="font-bold text-center text-black border-b border-black pb-1 mb-2">TRADITIONAL LINEAR</div>
+                  <div class="space-y-2 text-center">
+                    <div class="border border-neutral-400 p-1 bg-white">Virgin Inputs</div>
+                    <div>↓ (Subsidized Extract)</div>
+                    <div class="border border-neutral-400 p-1 bg-white">Product Life</div>
+                    <div>↓ (Hidden Waste)</div>
+                    <div class="border border-black bg-neutral-300 p-1 font-bold">Landfill Dump</div>
+                  </div>
+                </div>
+                <p class="text-[10px] text-neutral-600 mt-2 italic text-center">Externalized Costs Borne by Public Health</p>
+              </div>
+
+              <!-- Circular Column -->
+              <div class="border-2 border-black p-3 bg-white flex flex-col justify-between">
+                <div>
+                  <div class="font-bold text-center text-black border-b border-black pb-1 mb-2">TRUE-COST CIRCULAR</div>
+                  <div class="space-y-2 text-center">
+                    <div class="border border-black p-1 bg-neutral-50">Virgin Inputs</div>
+                    <div>↓ (Feebate Surcharge)</div>
+                    <div class="border border-black p-1 bg-neutral-50">Product Life</div>
+                    <div>↓ (Take-Back Value)</div>
+                    <div class="border-2 border-black bg-black text-white p-1 font-bold">Recycled Loop</div>
+                  </div>
+                </div>
+                <p class="text-[10px] text-neutral-800 mt-2 font-bold text-center">Producer Pays Full Life-Cycle Bill</p>
+              </div>
+            </div>
+            <div class="mt-3 text-center text-xs font-mono">
+              <span class="bg-black text-white px-2 py-0.5 font-bold">Outcome:</span> Clean mono-materials are cheaper on the shelf.
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article id="chap-3" class="border border-black p-6 bg-white space-y-6">
+        <div class="border-b border-black pb-2 flex justify-between items-center">
+          <span class="font-mono text-xs font-bold uppercase bg-black text-white px-2 py-0.5">Chapter 3</span>
+          <span class="font-mono text-xs text-neutral-600 uppercase">Modular Water Security</span>
+        </div>
+        <h3 class="font-headline text-3xl font-black text-black">
+          Modular Water Security: Marine Innovation for Terrestrial Resilience
+        </h3>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div class="lg:col-span-6 space-y-4 font-body text-base text-justify">
+            <h4 class="font-headline font-bold text-xl text-black">3.1 Scaling Down: Containerized Reverse Osmosis</h4>
+            <p>
+              Centralized mega-dams and billion-dollar coastal desalination complexes require decades of planning, brittle pipeline conduits, and heavy capital outlays. Adapting marine vessel technology into standardized <strong>20-foot and 40-foot intermodal shipping containers</strong> enables immediate deployment to drought-stricken regions and island communities by rail or barge.
+            </p>
+            <p>
+              Incorporating <strong>Isobaric Energy Recovery Devices (ERD)</strong> recovers hydraulic pressure directly from the rejected brine stream to repressurize incoming raw saltwater, plunging power draw by 60% to 70% down to 2.0–2.5 kWh/m³. Paired with Variable-Frequency Solar Drives, these units dial output up or down with sunshine, discarding costly battery banks.
+            </p>
+            <h4 class="font-headline font-bold text-xl text-black pt-2">3.2 Sustainable Brine Mitigation & Mineral Harvest</h4>
+            <p>
+              Instead of dumping toxic hyper-saline discharge into fragile shallow reefs, modular units deploy dispersed outfalls or direct effluent into inland stepped crystallization basins. These ponds yield commercial sodium chloride, magnesium, and epsomite salts—converting an ecological issue into domestic revenue.
+            </p>
+          </div>
+
+          <!-- Schematic Box: Intermodal Container Flowchart -->
+          <div class="lg:col-span-6 schematic-box p-4">
+            <p class="font-mono text-xs font-bold text-center border-b border-black pb-1 mb-2 uppercase">
+              Schematic 3.0: Standard 20-Foot Containerized System
+            </p>
+            <div class="border-2 border-black p-3 bg-neutral-50 mb-3">
+              <div class="font-mono text-xs font-bold mb-2 text-center text-neutral-700 uppercase">[ Standard 20-Foot Intermodal Shipping Container ]</div>
+              <div class="grid grid-cols-3 gap-2 font-mono text-[11px] text-center">
+                <div class="border border-black p-2 bg-white">
+                  <strong>Sand / Carbon</strong><br>Pre-Filters
+                </div>
+                <div class="border border-black p-2 bg-white">
+                  <strong>High-Pressure</strong><br>RO Membranes
+                </div>
+                <div class="border border-black p-2 bg-white">
+                  <strong>Energy Recovery</strong><br>Device (ERD)
+                </div>
+              </div>
+              <div class="flex justify-between items-center px-6 mt-2 font-mono text-xs font-bold">
+                <span>↓ Raw Feed</span>
+                <span>↓ Separation</span>
+                <span>↓ Energy Recycle</span>
+              </div>
+            </div>
+            <!-- Outputs -->
+            <div class="grid grid-cols-2 gap-3 font-mono text-xs text-center">
+              <div class="border border-black p-2 bg-white">
+                <span class="block font-bold">Potable Water</span>
+                <span class="text-neutral-600">10,000 – 50,000 L/day</span>
+              </div>
+              <div class="border border-black p-2 bg-white">
+                <span class="block font-bold">Recycled Energy</span>
+                <span class="text-neutral-600">60% Power Slashed</span>
+              </div>
+            </div>
+            <div class="border border-black p-2 bg-white text-center font-mono text-xs mt-2">
+              <span class="font-bold">Brine Direct to Solar Pans</span> &rarr; Zero Marine Dead Zones + Industrial Salts
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article id="chap-4" class="border border-black p-6 bg-white space-y-6">
+        <div class="border-b border-black pb-2 flex justify-between items-center">
+          <span class="font-mono text-xs font-bold uppercase bg-black text-white px-2 py-0.5">Chapter 4</span>
+          <span class="font-mono text-xs text-neutral-600 uppercase">Industrial Circularity</span>
+        </div>
+        <h3 class="font-headline text-3xl font-black text-black">
+          Industrial Circularity, Electrification, and Battery Life Cycles
+        </h3>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div class="lg:col-span-6 space-y-4 font-body text-base text-justify">
+            <h4 class="font-headline font-bold text-xl text-black">4.1 Chemical Stratification by Application</h4>
+            <p>
+              Scarcity requires engineering realism. Stationary energy storage systems (telecom towers, power grids) have no weight constraints and must utilize abundant <strong>Sodium-Ion</strong> or multi-day <strong>Iron-Air</strong> chemistries. Dense, hazardous Cobalt/Nickel-Manganese-Cobalt (NMC) chemistries are restricted solely to long-haul freight and commercial aviation. Passenger vehicles standardize on stable Lithium Iron Phosphate (LFP).
+            </p>
+            <h4 class="font-headline font-bold text-xl text-black pt-2">4.2 Design for Disassembly & Hydrometallurgy</h4>
+            <p>
+              Permanent structural glues must be outlawed in favor of mechanical fasteners and standardized busbars. Furthermore, pyrometallurgical smelting—which incinerates binders and vents toxic chemicals while losing lithium—is superseded by <strong>Ambient Hydrometallurgical Leaching</strong>, recovering over 95% of lithium, cobalt, and nickel salts from shredded black mass.
+            </p>
+          </div>
+
+          <!-- Schematic Box: Digital Battery Passport Pipeline -->
+          <div class="lg:col-span-6 schematic-box p-4">
+            <p class="font-mono text-xs font-bold text-center border-b border-black pb-1 mb-2 uppercase">
+              Schematic 4.0: Digital Battery Passport Lifecycle
+            </p>
+            <div class="border border-black p-2 text-center font-mono text-xs bg-neutral-50 mb-3">
+              <strong>Digital Battery Passport</strong><br>
+              <span class="text-[11px] text-neutral-600">Tracks Chemistry, State of Health (SOH), Impedance, Origin</span>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-3 font-mono text-xs">
+              <div class="border border-black p-2 bg-white text-center">
+                <span class="font-bold block border-b border-black pb-1 mb-1">SOH > 75%</span>
+                <span class="text-[11px]">Second-Life Application:<br>Grid Peak-Shaving BESS</span>
+              </div>
+              <div class="border border-black p-2 bg-white text-center">
+                <span class="font-bold block border-b border-black pb-1 mb-1">SOH &lt; 75%</span>
+                <span class="text-[11px]">Automated Disassembly:<br>Dry Mechanical Shred Strip</span>
+              </div>
+            </div>
+
+            <div class="mt-3 space-y-2 font-mono text-xs">
+              <div class="text-center">↓</div>
+              <div class="border border-black p-2 bg-white text-center">
+                <strong>Hydrometallurgical Acid/Base Bath</strong><br>
+                <span class="text-[11px] text-neutral-600">95%+ Active Salts Recovery (Lithium Carbonate & Nickel Sulfate)</span>
+              </div>
+              <div class="text-center">↓</div>
+              <div class="border-2 border-black bg-black text-white p-2 text-center font-bold">
+                New Cathode Precursors (Closed Industrial Cycle)
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article id="chap-5" class="border border-black p-6 bg-white space-y-6">
+        <div class="border-b border-black pb-2 flex justify-between items-center">
+          <span class="font-mono text-xs font-bold uppercase bg-black text-white px-2 py-0.5">Chapter 5</span>
+          <span class="font-mono text-xs text-neutral-600 uppercase">Frontier Systems</span>
+        </div>
+        <h3 class="font-headline text-3xl font-black text-black">
+          Cross-Cutting Frontiers: Energy, Food, and Health
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-body text-base">
+          <!-- Baseload -->
+          <div class="border border-black p-4 bg-white flex flex-col justify-between">
+            <div>
+              <span class="font-mono text-xs font-bold uppercase block border-b border-black pb-1 mb-2">5.1 Baseload Power</span>
+              <h4 class="font-headline font-bold text-lg mb-2">Deep Geothermal & SMR Islands</h4>
+              <p class="text-xs text-neutral-800 leading-relaxed text-justify">
+                Tapping supercritical heat rock via deep directional drilling provides continuous, zero-carbon baseload power on negligible land footprints. Combined with passively safe Small Modular Reactors (SMRs) and dynamic self-healing microgrid ties, regional grids isolate and protect critical life-support services during shocks.
+              </p>
+            </div>
+            <div class="mt-4 pt-2 border-t border-neutral-300 font-mono text-[10px] text-neutral-600">
+              Tech: Supercritical EGS / Passive SMR / Dynamic Islanding
+            </div>
+          </div>
+
+          <!-- Agritech -->
+          <div class="border border-black p-4 bg-white flex flex-col justify-between">
+            <div>
+              <span class="font-mono text-xs font-bold uppercase block border-b border-black pb-1 mb-2">5.2 Food Decoupling</span>
+              <h4 class="font-headline font-bold text-lg mb-2">Precision Fermentation & Hydro Loops</h4>
+              <p class="text-xs text-neutral-800 leading-relaxed text-justify">
+                Yields must expand vertically, not geographically. Closed-loop hydroponics eliminate 85% of water waste and zero out nitrogen runoff. Feeding insect meal raised on agricultural residuals frees crop acreage, while precision fermentation brews bio-identical dairy and egg proteins inside micro-footprint vats.
+              </p>
+            </div>
+            <div class="mt-4 pt-2 border-t border-neutral-300 font-mono text-[10px] text-neutral-600">
+              Tech: Sensor Irrigation / Black Soldier Fly / Fermentation Vats
+            </div>
+          </div>
+
+          <!-- Biosecurity -->
+          <div class="border border-black p-4 bg-white flex flex-col justify-between">
+            <div>
+              <span class="font-mono text-xs font-bold uppercase block border-b border-black pb-1 mb-2">5.3 Edge Healthcare</span>
+              <h4 class="font-headline font-bold text-lg mb-2">Paper Microfluidics & Modular mRNA</h4>
+              <p class="text-xs text-neutral-800 leading-relaxed text-justify">
+                Decentralized health safeguards against pandemic breakdown. Low-cost paper microfluidic strips paired with on-device computer vision empower community health workers with clinical diagnostic power. Cleanroom-in-a-box biomanufacturing pods brew vaccines and therapies locally, circumventing cold-chain hurdles.
+              </p>
+            </div>
+            <div class="mt-4 pt-2 border-t border-neutral-300 font-mono text-[10px] text-neutral-600">
+              Tech: Microfluidics / Cleanroom Pods / Point-of-Care Edge
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article id="chap-6" class="border-2 border-black p-6 bg-white space-y-6">
+        <div class="border-b border-black pb-2 flex justify-between items-center">
+          <span class="font-mono text-xs font-bold uppercase bg-black text-white px-2 py-0.5">Chapter 6 & Conclusion</span>
+          <span class="font-mono text-xs text-neutral-600 uppercase">The 20-Year Operational Timeline</span>
+        </div>
+        <h3 class="font-headline text-3xl font-black text-black">
+          Implementation Horizon and Systematic Milestones
+        </h3>
+
+        <!-- 3-Phase Interactive Timeline Diagram -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
+          <!-- Phase 1 -->
+          <div class="border-2 border-black p-4 bg-neutral-50 flex flex-col justify-between">
+            <div>
+              <span class="font-bold text-sm block border-b-2 border-black pb-1 mb-2">PHASE 1: HARMONIZATION</span>
+              <span class="text-neutral-500 font-semibold block mb-3">YEARS 0 — 5</span>
+              <ul class="space-y-2 text-[11px] leading-snug">
+                <li>• Standardize polymer catalogs & mono-material product assemblies.</li>
+                <li>• Deploy mandatory Digital Battery Passports.</li>
+                <li>• Enact revenue-neutral feebate taxes in G20 states.</li>
+                <li>• Charter the Multilateral Public-License Technology Trust.</li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-2 border-t border-black text-[10px] font-bold uppercase">Policy & Governance Focus</div>
+          </div>
+
+          <!-- Phase 2 -->
+          <div class="border-2 border-black p-4 bg-neutral-100 flex flex-col justify-between">
+            <div>
+              <span class="font-bold text-sm block border-b-2 border-black pb-1 mb-2">PHASE 2: DECENTRALIZATION</span>
+              <span class="text-neutral-500 font-semibold block mb-3">YEARS 5 — 12</span>
+              <ul class="space-y-2 text-[11px] leading-snug">
+                <li>• Mass-produce containerized solar RO desalination units.</li>
+                <li>• Erect regional low-temperature hydrometallurgical hubs along key transport arteries.</li>
+                <li>• Scale SMR microgrids & enhanced deep geothermal boreholes.</li>
+                <li>• Route retired vehicle battery packs to stationary peak-shaving.</li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-2 border-t border-black text-[10px] font-bold uppercase">Infrastructure Transformation</div>
+          </div>
+
+          <!-- Phase 3 -->
+          <div class="border-2 border-black p-4 bg-neutral-900 text-white flex flex-col justify-between">
+            <div>
+              <span class="font-bold text-sm block border-b-2 border-neutral-700 pb-1 mb-2">PHASE 3: TOTAL INTEGRATION</span>
+              <span class="text-neutral-400 font-semibold block mb-3">YEARS 12 — 20</span>
+              <ul class="space-y-2 text-[11px] text-neutral-200 leading-snug">
+                <li>• Mandate 100% Design for Disassembly (DfD) compliance on all electronics & vehicles.</li>
+                <li>• Fully eradicate sovereign virgin extraction subsidies.</li>
+                <li>• Connect national power topologies via bidirectional self-healing microgrid ties.</li>
+                <li>• Closed global mineral & material loops fully enforced.</li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-2 border-t border-neutral-700 text-[10px] font-bold uppercase text-neutral-300">Equilibrium Realized</div>
+          </div>
+        </div>
+
+        <!-- Conclusion Sub-section -->
+        <div class="mt-6 pt-4 border-t border-black font-body text-base text-justify leading-relaxed">
+          <h4 class="font-headline font-black text-xl mb-2">Architectural Conclusion: Practical Systems Engineering</h4>
+          <p>
+            Resolving systemic global friction does not hinge upon an improbable moral epiphany or a suffocating global autocracy. It demands pragmatic, systems-level engineering that turns planetary preservation into the most economically attractive and logistically resilient path forward. By coupling open-source technology transfer with localized value creation, shifting from massive fragile infrastructure to modular decentralized hardware, and forcing production lifecycles to internalize their true costs, humanity can construct an industrial and social equilibrium that provides security, dignity, and clean abundance across all nations.
+          </p>
+        </div>
+
+        <div class="text-center pt-2">
+          <button onclick="navigateToPage('page-dispatch')" class="bg-black text-white hover:bg-neutral-800 px-6 py-2.5 font-mono text-xs uppercase tracking-widest">
+            Proceed to Citizen Dispatch & Feedback Desk &rarr;
+          </button>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- PAGE 3: CIVIC ENGAGEMENT, DISPATCH & SHARING DESK               -->
+    <!-- =============================================================== -->
+    <section id="page-dispatch" class="hidden space-y-8">
+      
+      <div class="border-b-2 border-black pb-4 text-center">
+        <span class="font-mono text-xs font-bold uppercase bg-black text-white px-3 py-1 inline-block mb-2">Civic Participation Chamber</span>
+        <h2 class="font-headline text-3xl md:text-5xl font-extrabold text-black">Planetary Inquiries, Feedback & Parliamentary Dispatch</h2>
+        <p class="font-headline italic text-base md:text-lg text-neutral-700 mt-2 max-w-2xl mx-auto">
+          "Direct participation in the architectural dialogue: Record your perspective, formulate official dispatches to legislative representatives, and disseminate knowledge."
+        </p>
+      </div>
+
+      <!-- MAIN MULTI-SECTION FORM -->
+      <form id="civicDispatchForm" onsubmit="handleFormSubmission(event)" class="space-y-8">
+        
+        <!-- SECTION 1: CITIZEN PERSPECTIVE & COMMENTS -->
+        <fieldset class="border-2 border-black p-6 bg-white space-y-4">
+          <legend class="font-mono text-xs font-bold uppercase bg-black text-white px-3 py-1">
+            Section 1: Citizen Perspective & Commentary
+          </legend>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block font-mono text-xs font-bold uppercase mb-1" for="citizen-name">
+                Your Full Name or Nom de Plume <span class="text-neutral-500">*</span>
+              </label>
+              <input type="text" id="citizen-name" required placeholder="e.g., Dr. Eleanor Vance" class="w-full border border-black p-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-black">
+            </div>
+            <div>
+              <label class="block font-mono text-xs font-bold uppercase mb-1" for="citizen-email">
+                Contact Dispatch Email <span class="text-neutral-500">*</span>
+              </label>
+              <input type="email" id="citizen-email" required placeholder="e.g., e.vance@inquiry.org" class="w-full border border-black p-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-black">
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase mb-1" for="citizen-comments">
+              Your Thoughts & Critique of the Equilibrium Framework <span class="text-neutral-500">*</span>
+            </label>
+            <textarea id="citizen-comments" rows="4" required placeholder="Share your assessment on the economic feebate model, decentralized infrastructure, or local resilience barriers in your region..." class="w-full border border-black p-3 font-body text-base focus:outline-none focus:ring-2 focus:ring-black"></textarea>
+          </div>
+
+          <div>
+            <label class="block font-mono text-xs font-bold uppercase mb-1">
+              Urgency Rating for Global Implementation (1 = Incremental, 5 = Immediate Transformation)
+            </label>
+            <div class="flex items-center space-x-6 pt-1 font-mono text-xs">
+              <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="urgency" value="1" class="accent-black"><span>1</span></label>
+              <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="urgency" value="2" class="accent-black"><span>2</span></label>
+              <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="urgency" value="3" class="accent-black" checked><span>3</span></label>
+              <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="urgency" value="4" class="accent-black"><span>4</span></label>
+              <label class="flex items-center space-x-1 cursor-pointer"><input type="radio" name="urgency" value="5" class="accent-black"><span>5</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- SECTION 2: AREAS OF SPECIAL INTEREST -->
+        <fieldset class="border-2 border-black p-6 bg-white space-y-4">
+          <legend class="font-mono text-xs font-bold uppercase bg-black text-white px-3 py-1">
+            Section 2: Areas of Special Priority
+          </legend>
+          <p class="font-body italic text-sm text-neutral-600">
+            Select the systemic focus areas that are most critical to your community, country, or professional discipline:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 font-mono text-xs pt-1">
+            <label class="border border-black p-3 flex items-start space-x-2 cursor-pointer hover:bg-neutral-50">
+              <input type="checkbox" name="interest" value="Modular Water & Desalination" class="accent-black mt-0.5" checked onchange="updateLetterPreview()">
+              <span><strong>Modular Water Security</strong><br><span class="text-neutral-500 text-[10px]">Containerized RO & Brine mitigation</span></span>
+            </label>
+
+            <label class="border border-black p-3 flex items-start space-x-2 cursor-pointer hover:bg-neutral-50">
+              <input type="checkbox" name="interest" value="Multilateral IP Patent Trusts" class="accent-black mt-0.5" checked onchange="updateLetterPreview()">
+              <span><strong>Open IP Patent Trusts</strong><br><span class="text-neutral-500 text-[10px]">Royalty-free hardware licenses</span></span>
+            </label>
+
+            <label class="border border-black p-3 flex items-start space-x-2 cursor-pointer hover:bg-neutral-50">
+              <input type="checkbox" name="interest" value="Feebate Economics & EPR" class="accent-black mt-0.5" onchange="updateLetterPreview()">
+              <span><strong>The Feebate Economic Model</strong><br><span class="text-neutral-500 text-[10px]">True-cost virgin material taxes</span></span>
+            </label>
+
+            <label class="border border-black p-3 flex items-start space-x-2 cursor-pointer hover:bg-neutral-50">
+              <input type="checkbox" name="interest" value="Battery Passports & Hydrometallurgy" class="accent-black mt-0.5" onchange="updateLetterPreview()">
+              <span><strong>Battery Passports & Recycling</strong><br><span class="text-neutral-500 text-[10px]">95% hydrometallurgical recovery</span></span>
+            </label>
+
+            <label class="border border-black p-3 flex items-start space-x-2 cursor-pointer hover:bg-neutral-50">
+              <input type="checkbox" name="interest" value="Deep Geothermal & SMR Baseload" class="accent-black mt-0.5" onchange="updateLetterPreview()">
+              <span><strong>Deep Geothermal & SMRs</strong><br><span class="text-neutral-500 text-[10px]">Zero-carbon baseload microgrids</span></span>
+            </label>
+
+            <label class="border border-black p-3 flex items-start space-x-2 cursor-pointer hover:bg-neutral-50">
+              <input type="checkbox" name="interest" value="Precision Agritech & Edge Health" class="accent-black mt-0.5" onchange="updateLetterPreview()">
+              <span><strong>Agritech & Edge Healthcare</strong><br><span class="text-neutral-500 text-[10px]">Hydro loops & paper microfluidics</span></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- SECTION 3 & 4: GOVERNANCE, REPRESENTATION & ONE-CLICK DISPATCH -->
+        <fieldset class="border-2 border-black p-6 bg-white space-y-6">
+          <legend class="font-mono text-xs font-bold uppercase bg-black text-white px-3 py-1">
+            Section 3 & 4: Governance Identification & Official Dispatch
+          </legend>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label class="block font-mono text-xs font-bold uppercase mb-1" for="gov-jurisdiction">
+                Sovereign Jurisdiction / Country
+              </label>
+              <input type="text" id="gov-jurisdiction" value="Australia" oninput="updateLetterPreview()" class="w-full border border-black p-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-black">
+            </div>
+
+            <div>
+              <label class="block font-mono text-xs font-bold uppercase mb-1" for="gov-region">
+                Local Municipality / Regional Seat
+              </label>
+              <input type="text" id="gov-region" value="Victoria (South Barwon / Corangamite)" oninput="updateLetterPreview()" class="w-full border border-black p-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-black">
+            </div>
+
+            <div>
+              <label class="block font-mono text-xs font-bold uppercase mb-1" for="gov-official">
+                Official Representative / MP Name
+              </label>
+              <input type="text" id="gov-official" value="Member of Parliament / Local Authority" oninput="updateLetterPreview()" class="w-full border border-black p-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-black">
+            </div>
+          </div>
+
+          <!-- Checkbox to Enable Official Parliamentary Dispatch -->
+          <div class="border border-black p-4 bg-neutral-50">
+            <label class="flex items-center space-x-3 cursor-pointer">
+              <input type="checkbox" id="generate-letter-toggle" checked onchange="toggleLetterPreview()" class="w-4 h-4 accent-black">
+              <span class="font-mono text-xs font-bold uppercase tracking-wider text-black">
+                Draft an Official Communiqué to my Local Member of Parliament / Regional Authority
+              </span>
+            </label>
+            <p class="font-body text-xs text-neutral-600 mt-1 pl-7">
+              Automatically compiles your chosen priorities into a formal petition letter ready to copy or open in your default mail application.
+            </p>
+          </div>
+
+          <!-- Dynamic Representative Letter Preview Box -->
+          <div id="letter-preview-container" class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="font-mono text-xs font-bold uppercase tracking-wider">Official Communiqué Preview:</span>
+              <div class="space-x-2">
+                <button type="button" onclick="copyLetterToClipboard()" class="border border-black px-3 py-1 font-mono text-xs uppercase bg-white hover:bg-black hover:text-white transition">
+                  Copy Letter
+                </button>
+                <button type="button" onclick="openInEmailClient()" class="border border-black px-3 py-1 font-mono text-xs uppercase bg-black text-white hover:bg-neutral-800 transition">
+                  Open in Mail Client ✉
+                </button>
+              </div>
+            </div>
+            
+            <div class="border border-black p-4 bg-[#fcfaf5] font-mono text-xs text-neutral-900 whitespace-pre-wrap leading-relaxed max-h-80 overflow-y-auto" id="letter-content-box">
+<!-- Dynamic letter populates here via JS -->
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- SECTION 5: HUMAN VERIFICATION TEST (CAPTCHA) -->
+        <fieldset class="border-2 border-black p-6 bg-white space-y-4">
+          <legend class="font-mono text-xs font-bold uppercase bg-black text-white px-3 py-1">
+            Section 5: Human Verification Test
+          </legend>
+          <p class="font-body text-sm text-neutral-700">
+            To prevent computational spam and preserve dispatch integrity, please solve the logic challenge below:
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-neutral-100 border border-black p-4">
+            <div class="font-mono text-base font-bold bg-white border border-black px-4 py-2" id="captcha-question">
+              <!-- JS generates challenge -->
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="number" id="captcha-answer" required placeholder="Answer" class="w-28 border border-black p-2 font-mono text-sm focus:outline-none">
+              <button type="button" onclick="generateNewCaptcha()" class="border border-black px-2 py-2 font-mono text-xs uppercase bg-white hover:bg-neutral-200">
+                ↻ New Test
+              </button>
+            </div>
+            <span id="captcha-feedback" class="font-mono text-xs font-bold"></span>
+          </div>
+        </fieldset>
+
+        <!-- SECTION 6: SOCIAL PROPAGATION & SUBMIT -->
+        <fieldset class="border-2 border-black p-6 bg-white space-y-4">
+          <legend class="font-mono text-xs font-bold uppercase bg-black text-white px-3 py-1">
+            Section 6: Disseminate & Submit
+          </legend>
+          <p class="font-body text-sm text-neutral-700">
+            Share "Architecture of Global Equilibrium" with associates, academic institutions, and your community:
+          </p>
+
+          <!-- Social Share Buttons -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 font-mono text-xs text-center">
+            <a href="https://twitter.com/intent/tweet?text=Reading%20the%20Architecture%20of%20Global%20Equilibrium%20Blueprint%20%E2%80%94%20Systems%20Engineering%20for%20Planetary%20Challenges&url=https%3A%2F%2Fequilibrium-gazette.org" target="_blank" rel="noopener" class="border border-black p-2 bg-white hover:bg-black hover:text-white transition">
+              X / Twitter
+            </a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fequilibrium-gazette.org" target="_blank" rel="noopener" class="border border-black p-2 bg-white hover:bg-black hover:text-white transition">
+              LinkedIn
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fequilibrium-gazette.org" target="_blank" rel="noopener" class="border border-black p-2 bg-white hover:bg-black hover:text-white transition">
+              Facebook
+            </a>
+            <a href="https://api.whatsapp.com/send?text=Architecture%20of%20Global%20Equilibrium%20Blueprint%3A%20https%3A%2F%2Fequilibrium-gazette.org" target="_blank" rel="noopener" class="border border-black p-2 bg-white hover:bg-black hover:text-white transition">
+              WhatsApp
+            </a>
+            <a href="https://reddit.com/submit?url=https%3A%2F%2Fequilibrium-gazette.org&title=The%20Global%20Equilibrium%20Gazette%20-%20Planetary%20Blueprint" target="_blank" rel="noopener" class="border border-black p-2 bg-white hover:bg-black hover:text-white transition">
+              Reddit
+            </a>
+            <button type="button" onclick="shareViaEmail()" class="border border-black p-2 bg-white hover:bg-black hover:text-white transition">
+              Email Colleague
+            </button>
+          </div>
+
+          <!-- Submission Button -->
+          <div class="pt-4 border-t border-black flex flex-col sm:flex-row items-center justify-between gap-4">
+            <span class="font-mono text-xs text-neutral-500">Every submission is archived in the Public Interest Repository.</span>
+            <button type="submit" class="w-full sm:w-auto px-8 py-3 bg-black text-white hover:bg-neutral-800 font-mono text-xs uppercase tracking-widest font-bold">
+              Certify & Transmit Dispatch &rarr;
+            </button>
+          </div>
+        </fieldset>
+
+      </form>
+
+      <!-- SUBMISSION CONFIRMATION MODAL (PRINT PRESS RECEIPT STYLE) -->
+      <div id="submission-modal" class="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white border-4 border-black max-w-lg w-full p-6 shadow-2xl relative space-y-4">
+          <div class="border-b-2 border-black pb-2 text-center">
+            <span class="font-mono text-xs font-bold uppercase tracking-widest text-neutral-600">OFFICIAL NOTIFICATION</span>
+            <h3 class="font-headline text-2xl font-black uppercase text-black mt-1">Dispatch Successfully Filed</h3>
+          </div>
+          <div class="font-body text-sm space-y-3 leading-relaxed">
+            <p id="modal-greeting" class="font-bold text-base"></p>
+            <p>
+              Your thoughts and priority selections have been formally logged into the <strong>Gazette Systems Ledger</strong>. Your localized representative parameters have been rendered into official parliamentary format.
+            </p>
+            <div class="border border-black p-3 bg-neutral-50 font-mono text-xs">
+              <p><strong>Filing ID:</strong> <span id="modal-filing-id">EQ-9482-SYS</span></p>
+              <p><strong>Timestamp:</strong> <span id="modal-timestamp"></span></p>
+              <p><strong>Primary Interest:</strong> <span id="modal-priorities"></span></p>
+            </div>
+            <p class="font-mono text-xs text-neutral-600">
+              A transcript has been formatted for distribution. You may now contact your MP directly using the dispatch tool.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-black flex justify-end">
+            <button onclick="closeSubmissionModal()" class="px-6 py-2 bg-black text-white font-mono text-xs uppercase font-bold hover:bg-neutral-800">
+              Acknowledge & Close
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="w-full max-w-7xl mx-auto px-4 mt-12 mb-6">
+    <div class="border-t-2 border-black pt-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 font-mono text-xs">
+        <div>
+          <h5 class="font-bold uppercase tracking-wider mb-2 text-black">The Gazette Colophon</h5>
+          <p class="text-neutral-600 text-[11px] leading-relaxed">
+            Set in Playfair Display, Cinzel, and Newsreader. Modeled after late 19th and early 20th century broadsheets. Dedicated to planetary regenerative engineering.
+          </p>
+        </div>
+        <div>
+          <h5 class="font-bold uppercase tracking-wider mb-2 text-black">Primary Domains</h5>
+          <ul class="text-[11px] text-neutral-600 space-y-1">
+            <li>• Multilateral IP Patent Trusts</li>
+            <li>• Containerized RO Desalination</li>
+            <li>• Ambient Hydrometallurgy</li>
+            <li>• Precision Microfluidic Health</li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="font-bold uppercase tracking-wider mb-2 text-black">Jurisdictional Access</h5>
+          <p class="text-neutral-600 text-[11px] leading-relaxed">
+            Open-access publication. All technical blueprints published under reciprocal open hardware commons. No crown copyright or proprietary paywalls.
+          </p>
+        </div>
+        <div>
+          <h5 class="font-bold uppercase tracking-wider mb-2 text-black">Navigation Index</h5>
+          <div class="flex flex-col space-y-1 text-[11px]">
+            <a href="#" onclick="navigateToPage('page-front'); return false;" class="underline hover:text-black">Front Page (Headlines & Hero)</a>
+            <a href="#" onclick="navigateToPage('page-breakdown'); return false;" class="underline hover:text-black">Chapter Breakdown & Schematics</a>
+            <a href="#" onclick="navigateToPage('page-dispatch'); return false;" class="underline hover:text-black">Civic Form & Representative Dispatch</a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-black mt-4 pt-3 flex flex-col sm:flex-row justify-between items-center text-[10px] font-mono text-neutral-500">
+        <span>ARCHITECTURE OF GLOBAL EQUILIBRIUM © 2026. REPRODUCIBLE UNDER OPEN TECHNICAL PROTOCOLS.</span>
+        <span>ISSUED GLOBALLY IN CO-OPERATION WITH PARLIAMENTARY COMMITTEES</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-6 right-6 bg-black text-white px-4 py-2 font-mono text-xs uppercase tracking-wider shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+    Copied to clipboard
+  </div>
+
+  <script>
+    /* -------------------------------------------------------------
+       STATE & CONTROLLER OBJECTS
+       ------------------------------------------------------------- */
+    let currentCaptchaSolution = null;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initDateLine();
+      initHeroSkylineCanvas();
+      generateNewCaptcha();
+      updateLetterPreview();
+      
+      // Handle window resize for dynamic canvas redraw
+      window.addEventListener('resize', () => {
+        initHeroSkylineCanvas();
+      });
+    });
+
+    /* -------------------------------------------------------------
+       NAVIGATION ROUTING (Page 1, Page 2, Page 3)
+       ------------------------------------------------------------- */
+    function navigateToPage(pageId) {
+      const pages = ['page-front', 'page-breakdown', 'page-dispatch'];
+      pages.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hidden');
+      });
+
+      const target = document.getElementById(pageId);
+      if (target) {
+        target.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Update button styling
+      const buttons = {
+        'page-front': 'nav-btn-front',
+        'page-breakdown': 'nav-btn-breakdown',
+        'page-dispatch': 'nav-btn-dispatch'
+      };
+
+      Object.values(buttons).forEach(btnId => {
+        const b = document.getElementById(btnId);
+        if (b) b.classList.remove('active');
+      });
+
+      const activeBtn = document.getElementById(buttons[pageId]);
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    function navigateToBreakdownSection(sectionId) {
+      navigateToPage('page-breakdown');
+      setTimeout(() => {
+        jumpToSubSection(sectionId);
+      }, 100);
+    }
+
+    function jumpToSubSection(sectionId) {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // subtle highlight animation
+        el.style.outline = '3px solid black';
+        setTimeout(() => {
+          el.style.outline = 'none';
+        }, 1200);
+      }
+    }
+
+    /* -------------------------------------------------------------
+       DYNAMIC DATELINE CLOCK
+       ------------------------------------------------------------- */
+    function initDateLine() {
+      const el = document.getElementById('dateline-date');
+      const now = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+      el.textContent = now.toLocaleDateString('en-US', options).toUpperCase();
+    }
+
+    /* -------------------------------------------------------------
+       HERO BLACK & WHITE CITY SKYLINE CANVAS WITH STARS & MOON
+       ------------------------------------------------------------- */
+    function initHeroSkylineCanvas() {
+      const canvas = document.getElementById('cityHeroCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const width = canvas.parentElement.clientWidth;
+      const height = canvas.parentElement.clientHeight;
+
+      // Adjust for device pixel ratio for sharp print look
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+
+      // Deep Black & Charcoal Night Sky
+      const skyGrad = ctx.createLinearGradient(0, 0, 0, height);
+      skyGrad.addColorStop(0, '#020202');
+      skyGrad.addColorStop(0.5, '#0d0d0d');
+      skyGrad.addColorStop(1, '#1c1c1c');
+      ctx.fillStyle = skyGrad;
+      ctx.fillRect(0, 0, width, height);
+
+      // 1. Draw Starfield with Varied Magnitudes
+      // Fixed pseudo-random seed using deterministic formula so it stays crisp
+      const starCount = Math.floor(width * 0.4);
+      for (let i = 0; i < starCount; i++) {
+        const sx = ((i * 1973) % width);
+        const sy = ((i * 3571) % (height * 0.58));
+        const radius = (i % 7 === 0) ? 1.5 : (i % 3 === 0 ? 1.0 : 0.6);
+        const alpha = (i % 5 === 0) ? 0.9 : 0.5 + (i % 4) * 0.12;
+
+        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+        ctx.beginPath();
+        ctx.arc(sx, sy, radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Subtle cross diffraction spike on a few bright stars
+        if (i % 45 === 0) {
+          ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.6})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(sx - 3, sy); ctx.lineTo(sx + 3, sy);
+          ctx.moveTo(sx, sy - 3); ctx.lineTo(sx, sy + 3);
+          ctx.stroke();
+        }
+      }
+
+      // 2. Draw Glowing Moon in the Horizon
+      const moonX = width * 0.78;
+      const moonY = height * 0.28;
+      const moonRadius = Math.min(36, width * 0.06);
+
+      // Outer Moon Glow
+      const glowGrad = ctx.createRadialGradient(moonX, moonY, moonRadius * 0.8, moonX, moonY, moonRadius * 3);
+      glowGrad.addColorStop(0, 'rgba(255, 255, 255, 0.4)');
+      glowGrad.addColorStop(0.4, 'rgba(255, 255, 255, 0.12)');
+      glowGrad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.fillStyle = glowGrad;
+      ctx.beginPath();
+      ctx.arc(moonX, moonY, moonRadius * 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Moon Body
+      ctx.fillStyle = '#f2f2f2';
+      ctx.beginPath();
+      ctx.arc(moonX, moonY, moonRadius, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Moon Crater details (monochromatic shading)
+      ctx.fillStyle = 'rgba(160, 160, 160, 0.35)';
+      const craters = [
+        { dx: -0.2, dy: -0.2, r: 0.25 },
+        { dx: 0.3, dy: -0.1, r: 0.18 },
+        { dx: 0.1, dy: 0.3, r: 0.3 },
+        { dx: -0.3, dy: 0.2, r: 0.15 }
+      ];
+      craters.forEach(c => {
+        ctx.beginPath();
+        ctx.arc(moonX + c.dx * moonRadius, moonY + c.dy * moonRadius, c.r * moonRadius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // 3. Distant City Layer (Silhouettes with subtle fog)
+      const distantBuildings = 40;
+      const dStep = width / distantBuildings;
+      ctx.fillStyle = '#161616';
+      for (let i = 0; i < distantBuildings; i++) {
+        const bH = 50 + (((i * 73) % 90));
+        ctx.fillRect(i * dStep, height - bH - 30, dStep + 1, bH + 30);
+      }
+
+      // 4. Midground Skyline with Antenna Spire details
+      const midBuildings = 28;
+      const mStep = width / midBuildings;
+      for (let i = 0; i < midBuildings; i++) {
+        const bH = 90 + (((i * 137) % 150));
+        const bx = i * mStep;
+        
+        ctx.fillStyle = '#0f0f0f';
+        ctx.fillRect(bx, height - bH, mStep - 2, bH);
+
+        // Antenna or spire
+        if (i % 3 === 0) {
+          ctx.strokeStyle = '#666';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(bx + mStep / 2, height - bH);
+          ctx.lineTo(bx + mStep / 2, height - bH - 24);
+          ctx.stroke();
+
+          // Spire beacon dot
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(bx + mStep / 2, height - bH - 24, 1.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // 5. Foreground Metropolis Silhouettes with Illuminated Windows
+      const fgCount = 18;
+      const fgStep = width / fgCount;
+      for (let i = 0; i < fgCount; i++) {
+        const fH = 140 + (((i * 211) % 190));
+        const fx = i * fgStep;
+        const bWidth = fgStep + 2;
+        
+        // Deep Black Building Face
+        ctx.fillStyle = '#050505';
+        ctx.fillRect(fx, height - fH, bWidth, fH);
+
+        // Architectural rim light
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(fx, height - fH);
+        ctx.lineTo(fx + bWidth, height - fH);
+        ctx.stroke();
+
+        // Monochromatic Window Grid
+        const rows = Math.floor(fH / 12);
+        const cols = Math.floor(bWidth / 9);
+        for (let r = 1; r < rows - 1; r++) {
+          for (let c = 1; c < cols - 1; c++) {
+            const seed = (i * 53 + r * 19 + c * 7);
+            if (seed % 3 === 0) {
+              const lum = (seed % 2 === 0) ? 'rgba(255,255,255,0.85)' : 'rgba(210,210,210,0.4)';
+              ctx.fillStyle = lum;
+              ctx.fillRect(fx + c * 9, height - fH + (r * 12), 4, 6);
+            }
+          }
+        }
+      }
+
+      // 6. Halftone / Newspaper Dot Grid Effect on the Canvas
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
+      for (let y = 0; y < height; y += 4) {
+        ctx.fillRect(0, y, width, 1);
+      }
+    }
+
+    /* -------------------------------------------------------------
+       SECTION 3 & 4: DYNAMIC REPRESENTATIVE COMMUNIQUÉ GENERATOR
+       ------------------------------------------------------------- */
+    function toggleLetterPreview() {
+      const toggle = document.getElementById('generate-letter-toggle');
+      const box = document.getElementById('letter-preview-container');
+      if (toggle.checked) {
+        box.classList.remove('hidden');
+        updateLetterPreview();
+      } else {
+        box.classList.add('hidden');
+      }
+    }
+
+    function updateLetterPreview() {
+      const official = document.getElementById('gov-official')?.value || 'Member of Parliament';
+      const jurisdiction = document.getElementById('gov-jurisdiction')?.value || 'the Commonwealth / Regional Seat';
+      const region = document.getElementById('gov-region')?.value || 'our regional electorate';
+      const citizenName = document.getElementById('citizen-name')?.value || '[Concerned Citizen / Elector]';
+      
+      // Selected Priority Checkboxes
+      const checkboxes = document.querySelectorAll('input[name="interest"]:checked');
+      const selected = Array.from(checkboxes).map(cb => `  • ${cb.value}`).join('\n');
+      
+      const letterText = `MEMORANDUM FOR THE ATTENTION OF: ${official.toUpperCase()}
+REPRESENTATIVE JURISDICTION: ${region.toUpperCase()} (${jurisdiction.toUpperCase()})
+SUBJECT: CIVIC PETITION FOR IMMEDIATE SYSTEMIC ARCHITECTURAL ALIGNMENT
+
+Dear Representative ${official},
+
+As an active constituent and elector residing within ${region}, I submit this formal petition urging our legislative assembly to review and adopt key engineering paradigms outlined in the "Architecture of Global Equilibrium: Practical Systems Engineering for Planetary Challenges."
+
+Contemporary geopolitical, climatic, and industrial disruptions are not irremediable failings—they are structural defects in our linear economic and utility architectures. We urge your office to advance policies that replace fragile centralized structures with resilient, self-healing public commons.
+
+Specifically, I petition your active leadership and sponsorship on the following priority legislative fronts:
+
+${selected || '  • General Systemic Equilibrium & Life-Cycle Producer Liability'}
+
+KEY LEGISLATIVE RECOMMENDATIONS FOR IMMEDIATE ADOPTION:
+1. Enact Revenue-Neutral Feebates: Tax virgin unrecyclable polymers and direct 100% of receipts to immediate rebates on certified circular, mono-material goods.
+2. Mandate Digital Battery Passports & Ambient Hydrometallurgy: Require transparent state-of-health tracking for all energy storage, ending pyrometallurgical destruction.
+3. Decentralize Regional Hydrology & Baseload: Support containerized solar desalination with inland mineral crystallization, alongside deep enhanced geothermal and passively safe SMR baseloads.
+4. Charter Multilateral Public-Domain IP Trusts: Guarantee that critical environmental technologies remain unburdened by speculative patent monopolies.
+
+We stand prepared to deliver comprehensive technical whitepapers and empirical documentation to your legislative committee. I request your written response outlining our electorate’s strategic roadmap on these imperative structural transitions.
+
+Respectfully submitted,
+
+${citizenName}
+Transmitted via The Global Equilibrium Gazette Civic Portal
+Date: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+
+      const box = document.getElementById('letter-content-box');
+      if (box) box.textContent = letterText;
+    }
+
+    function copyLetterToClipboard() {
+      const letterText = document.getElementById('letter-content-box').textContent;
+      const textArea = document.createElement("textarea");
+      textArea.value = letterText;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        document.execCommand('copy');
+        showToast("Official Dispatch Letter copied to clipboard.");
+      } catch (err) {
+        showToast("Unable to copy. Please manually highlight text.");
+      }
+      document.body.removeChild(textArea);
+    }
+
+    function openInEmailClient() {
+      const official = document.getElementById('gov-official')?.value || 'Representative';
+      const letterText = document.getElementById('letter-content-box').textContent;
+      const subject = encodeURIComponent(`Constituent Petition: Adoption of Global Systems Architecture`);
+      const body = encodeURIComponent(letterText);
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    }
+
+    function shareViaEmail() {
+      const subject = encodeURIComponent("Blueprint for Planetary Challenges: The Global Equilibrium Gazette");
+      const body = encodeURIComponent("I recommend examining this comprehensive architectural blueprint for planetary systems engineering, covering containerized water, open IP trusts, true-cost feebates, and battery lifecycles:\n\nhttps://equilibrium-gazette.org");
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    }
+
+    /* -------------------------------------------------------------
+       SECTION 5: INTERACTIVE HUMAN VERIFICATION CHALLENGE
+       ------------------------------------------------------------- */
+    function generateNewCaptcha() {
+      const qBox = document.getElementById('captcha-question');
+      const answerInput = document.getElementById('captcha-answer');
+      const feedback = document.getElementById('captcha-feedback');
+      if (!qBox) return;
+
+      answerInput.value = '';
+      feedback.textContent = '';
+      feedback.className = 'font-mono text-xs font-bold';
+
+      const types = ['math', 'logic'];
+      const chosen = types[Math.floor(Math.random() * types.length)];
+
+      if (chosen === 'math') {
+        const num1 = Math.floor(Math.random() * 25) + 12;
+        const num2 = Math.floor(Math.random() * 15) + 7;
+        currentCaptchaSolution = num1 + num2;
+        qBox.textContent = `Human Test: ${num1} + ${num2} = ?`;
+      } else {
+        const factor = Math.floor(Math.random() * 6) + 3;
+        const mult = 8;
+        currentCaptchaSolution = factor * mult;
+        qBox.textContent = `Verification: What is ${mult} multiplied by ${factor}?`;
+      }
+    }
+
+    /* -------------------------------------------------------------
+       FORM SUBMISSION AND VALIDATION
+       ------------------------------------------------------------- */
+    function handleFormSubmission(event) {
+      event.preventDefault();
+
+      const answerInput = document.getElementById('captcha-answer');
+      const feedback = document.getElementById('captcha-feedback');
+      const enteredVal = parseInt(answerInput.value.trim(), 10);
+
+      if (enteredVal !== currentCaptchaSolution) {
+        feedback.textContent = "✗ Verification failed. Incorrect response.";
+        feedback.className = "font-mono text-xs font-bold text-red-600";
+        generateNewCaptcha();
+        return false;
+      }
+
+      // Populate Confirmation Modal
+      const name = document.getElementById('citizen-name').value;
+      const modal = document.getElementById('submission-modal');
+      const modalGreeting = document.getElementById('modal-greeting');
+      const modalFiling = document.getElementById('modal-filing-id');
+      const modalTime = document.getElementById('modal-timestamp');
+      const modalPriorities = document.getElementById('modal-priorities');
+
+      const checkboxes = document.querySelectorAll('input[name="interest"]:checked');
+      const priorityCount = checkboxes.length;
+
+      modalGreeting.textContent = `Attn: ${name}, your testimony and petition have been verified.`;
+      modalFiling.textContent = `EQ-ARCH-${Math.floor(100000 + Math.random() * 900000)}`;
+      modalTime.textContent = new Date().toUTCString();
+      modalPriorities.textContent = `${priorityCount} Systems Disciplines Selected`;
+
+      modal.classList.remove('hidden');
+      return false;
+    }
+
+    function closeSubmissionModal() {
+      const modal = document.getElementById('submission-modal');
+      modal.classList.add('hidden');
+      showToast("Dispatch certified & transmitted successfully.");
+      // reset form
+      document.getElementById('civicDispatchForm').reset();
+      generateNewCaptcha();
+      updateLetterPreview();
+    }
+
+    /* -------------------------------------------------------------
+       TOAST UTILITY
+       ------------------------------------------------------------- */
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.classList.remove('opacity-0', 'translate-y-20');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-20');
+      }, 3200);
+    }
+  </script>
+</body>
+</html>
